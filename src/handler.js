@@ -24,7 +24,7 @@ const addNoteHandler = (req, h) => {
     return res;
   }
 
-  return handleErrorRequest("Catatan Gagal Ditambahkan");
+  return handleErrorRequest(h, "Catatan Gagal Ditambahkan");
 };
 
 const getAllNotesHandler = () => ({ status: "success", data: { notes } });
@@ -42,7 +42,7 @@ const getNoteByIdHandler = (req, h) => {
     };
   }
 
-  return handleErrorRequest("Catatan tidak ditemukan");
+  return handleErrorRequest(h, "Catatan tidak ditemukan");
 };
 
 const editNoteByIdHandler = (req, h) => {
@@ -69,7 +69,7 @@ const editNoteByIdHandler = (req, h) => {
     return res;
   }
 
-  return handleErrorRequest("Gagal memperbarui catatan. Id tidak ditemukan");
+  return handleErrorRequest(h, "Gagal memperbarui catatan. Id tidak ditemukan");
 };
 
 const deleteNoteByIdHandler = (req, h) => {
@@ -86,10 +86,10 @@ const deleteNoteByIdHandler = (req, h) => {
     return res;
   }
 
-  return handleErrorRequest("Gagal menghapus catatan. Id tidak ditemukan");
+  return handleErrorRequest(h, "Gagal menghapus catatan. Id tidak ditemukan");
 };
 
-const handleErrorRequest = (message, status = "fail", code = 404, h) => {
+const handleErrorRequest = (h, message, status = "fail", code = 404) => {
   const res = h.response({
     status: status,
     message: message,
